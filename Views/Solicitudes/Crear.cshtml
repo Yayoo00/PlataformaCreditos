@@ -1,0 +1,23 @@
+@model PlataformaCreditos.Models.SolicitudCredito
+
+<h2>Registrar solicitud de crédito</h2>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Mensaje"]
+    </div>
+}
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Crear" method="post">
+    <div class="mb-3">
+        <label>Monto solicitado</label>
+        <input asp-for="MontoSolicitado" class="form-control" />
+        <span asp-validation-for="MontoSolicitado" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Registrar solicitud</button>
+    <a asp-action="MisSolicitudes" class="btn btn-secondary">Volver</a>
+</form>
