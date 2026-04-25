@@ -1,8 +1,43 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero-section text-center">
+    <h1>Plataforma de Créditos</h1>
+    <p>
+        Sistema interno para registrar, consultar y evaluar solicitudes de crédito
+        de manera rápida, segura y ordenada.
+    </p>
+
+    <div class="mt-4">
+        <a asp-controller="Solicitudes" asp-action="Crear" class="btn btn-primary btn-lg me-2">
+            Nueva solicitud
+        </a>
+        <a asp-controller="Solicitudes" asp-action="MisSolicitudes" class="btn btn-outline-primary btn-lg">
+            Ver mis solicitudes
+        </a>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4">
+        <div class="home-card">
+            <h4>Registro de solicitudes</h4>
+            <p>Permite ingresar nuevas solicitudes de crédito con validaciones de negocio.</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="home-card">
+            <h4>Evaluación analista</h4>
+            <p>Los analistas pueden aprobar o rechazar solicitudes pendientes.</p>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="home-card">
+            <h4>Sesión y cache</h4>
+            <p>Uso de Redis para mejorar la experiencia y el rendimiento del sistema.</p>
+        </div>
+    </div>
 </div>

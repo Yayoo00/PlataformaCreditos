@@ -1,27 +1,41 @@
-body {
-    background: #f4f6f9;
+.hero-section {
+    background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+    color: white;
+    padding: 70px 30px;
+    border-radius: 22px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.15);
 }
 
-.navbar {
-    box-shadow: 0 3px 10px rgba(0,0,0,.08);
+.hero-section h1 {
+    font-size: 48px;
+    font-weight: 800;
 }
 
-.container {
-    margin-top: 25px;
+.hero-section p {
+    font-size: 19px;
+    max-width: 700px;
+    margin: 15px auto;
 }
 
-h1, h2 {
-    font-weight: 700;
-    color: #1f2937;
-}
-
-.card, table, form {
+.home-card {
     background: white;
-    border-radius: 14px;
-    padding: 18px;
-    box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    border-radius: 18px;
+    padding: 28px;
+    min-height: 180px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.10);
+    transition: transform .2s ease, box-shadow .2s ease;
 }
 
-.btn {
-    border-radius: 10px;
+.home-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,.16);
+}
+
+.home-card h4 {
+    font-weight: 700;
+    color: #0d6efd;
+}
+
+.home-card p {
+    color: #4b5563;
 }
