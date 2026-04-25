@@ -1,0 +1,29 @@
+@model List<PlataformaCreditos.Models.SolicitudCredito>
+
+<h2>Solicitudes pendientes</h2>
+
+<table class="table">
+    <tr>
+        <th>Monto</th>
+        <th>Acciones</th>
+    </tr>
+
+@foreach (var s in Model)
+{
+    <tr>
+        <td>@s.MontoSolicitado</td>
+        <td>
+            <form asp-action="Aprobar" method="post">
+                <input type="hidden" name="id" value="@s.Id" />
+                <button class="btn btn-success">Aprobar</button>
+            </form>
+
+            <form asp-action="Rechazar" method="post">
+                <input type="hidden" name="id" value="@s.Id" />
+                <input name="motivo" placeholder="Motivo" />
+                <button class="btn btn-danger">Rechazar</button>
+            </form>
+        </td>
+    </tr>
+}
+</table>
