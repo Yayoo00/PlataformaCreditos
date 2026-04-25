@@ -61,6 +61,8 @@ Data/
  Migrations/
   00000000000000_CreateIdentitySchema.cs
   00000000000000_CreateIdentitySchema.Designer.cs
+  20260425165740_AgregaSolicitudesCredito.cs
+  20260425165740_AgregaSolicitudesCredito.Designer.cs
   ApplicationDbContextModelSnapshot.cs
 Models/
  Cliente.cs
