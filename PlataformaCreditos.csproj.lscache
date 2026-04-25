@@ -60,7 +60,11 @@ Data/
   00000000000000_CreateIdentitySchema.cs
   00000000000000_CreateIdentitySchema.Designer.cs
   ApplicationDbContextModelSnapshot.cs
-Models/ErrorViewModel.cs
+Models/
+ Cliente.cs
+ ErrorViewModel.cs
+ EstadoSolicitud.cs
+ SolicitudCredito.cs
 obj/Debug/net8.0/
  .NETCoreApp,Version=v8.0.AssemblyAttributes.cs
  PlataformaCreditos.AssemblyInfo.cs
