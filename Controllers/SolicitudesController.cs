@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PlataformaCreditos.Data;
 using PlataformaCreditos.Models;
+using Microsoft.Extensions.Caching.Distributed;
+using System.Text.Json;
 
 namespace PlataformaCreditos.Controllers;
 
@@ -12,11 +14,11 @@ public class SolicitudesController : Controller
 {
     private readonly ApplicationDbContext _context;
     private readonly UserManager<IdentityUser> _userManager;
-
-    public SolicitudesController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
-    {
+    private readonly IDistributedCache _cache;
+    public SolicitudesController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IDistributedCache cache)    {
         _context = context;
         _userManager = userManager;
+        _cache = cache;
     }
 
     public async Task<IActionResult> MisSolicitudes(
@@ -37,7 +39,16 @@ public class SolicitudesController : Controller
         }
 
         var userId = _userManager.GetUserId(User);
-        Console.WriteLine("MI ID: " + userId);
+        var cacheKey = $"solicitudes_{userId}";
+
+// 🔹 Intentar leer cache
+var cacheData = await _cache.GetStringAsync(cacheKey);
+
+if (cacheData != null)
+{
+    var solicitudesCache = JsonSerializer.Deserialize<List<SolicitudCredito>>(cacheData);
+    return View(solicitudesCache);
+}
 
         var query = _context.SolicitudesCredito
             .Include(s => s.Cliente)
@@ -61,7 +72,18 @@ public class SolicitudesController : Controller
                 query = query.Where(s => s.FechaSolicitud <= fechaFin.Value);
         }
 
-        return View(await query.ToListAsync());
+        var solicitudes = await query.ToListAsync();
+
+// 🔹 Guardar en cache por 60 segundos
+await _cache.SetStringAsync(
+    cacheKey,
+    JsonSerializer.Serialize(solicitudes),
+    new DistributedCacheEntryOptions
+    {
+        AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(60)
+    });
+
+return View(solicitudes);
     }
 
     public async Task<IActionResult> Detalle(int id)
@@ -75,6 +97,8 @@ public class SolicitudesController : Controller
         if (solicitud == null)
             return NotFound();
 
+        HttpContext.Session.SetInt32("UltimaSolicitudId", solicitud.Id);
+        HttpContext.Session.SetString("UltimaSolicitudMonto", solicitud.MontoSolicitado.ToString());
         return View(solicitud);
     }
     public IActionResult Crear()
@@ -128,6 +152,7 @@ public class SolicitudesController : Controller
 
     _context.SolicitudesCredito.Add(solicitud);
     await _context.SaveChangesAsync();
+    await _cache.RemoveAsync($"solicitudes_{userId}");
 
     TempData["Mensaje"] = "Solicitud registrada correctamente.";
     return RedirectToAction("MisSolicitudes");
