@@ -1,0 +1,68 @@
+@model List<PlataformaCreditos.Models.SolicitudCredito>
+@using PlataformaCreditos.Models
+
+<h2>Mis solicitudes</h2>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form method="get" class="row g-3 mb-4">
+    <div class="col-md-2">
+        <label>Estado</label>
+        <select name="estado" class="form-control">
+            <option value="">Todos</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="Aprobado">Aprobado</option>
+            <option value="Rechazado">Rechazado</option>
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <label>Monto mínimo</label>
+        <input type="number" step="0.01" name="montoMin" class="form-control" />
+    </div>
+
+    <div class="col-md-2">
+        <label>Monto máximo</label>
+        <input type="number" step="0.01" name="montoMax" class="form-control" />
+    </div>
+
+    <div class="col-md-2">
+        <label>Fecha inicio</label>
+        <input type="date" name="fechaInicio" class="form-control" />
+    </div>
+
+    <div class="col-md-2">
+        <label>Fecha fin</label>
+        <input type="date" name="fechaFin" class="form-control" />
+    </div>
+
+    <div class="col-md-2 d-flex align-items-end">
+        <button class="btn btn-primary w-100">Filtrar</button>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Monto</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Detalle</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>S/ @item.MontoSolicitado</td>
+                <td>@item.FechaSolicitud.ToShortDateString()</td>
+                <td>@item.Estado</td>
+                <td>
+                    <a asp-action="Detalle" asp-route-id="@item.Id" class="btn btn-sm btn-info">
+                        Ver detalle
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
