@@ -54,6 +54,7 @@ TemporaryDependencyNodeTargetIdentifier=net8.0
 
 [sourceFiles]
 Controllers/
+ AnalistaController.cs
  HomeController.cs
  SolicitudesController.cs
 Data/ApplicationDbContext.cs
@@ -431,36 +432,38 @@ obj/Debug/net8.0/PlataformaCreditos.GeneratedMSBuildEditorConfig.editorconfig
 
 [additionalFiles]
 Areas/Identity/Pages/_ViewStart.cshtml
-Views/Home/
- Index.cshtml
- Privacy.cshtml
-Views/Shared/
- Error.cshtml
- _Layout.cshtml
- _LoginPartial.cshtml
- _ValidationScriptsPartial.cshtml
-Views/Solicitudes/
- Crear.cshtml
- Detalle.cshtml
- MisSolicitudes.cshtml
 Views/
+ Analista/Index.cshtml
+ Home/
+  Index.cshtml
+  Privacy.cshtml
+ Shared/
+  Error.cshtml
+  _Layout.cshtml
+  _LoginPartial.cshtml
+  _ValidationScriptsPartial.cshtml
+ Solicitudes/
+  Crear.cshtml
+  Detalle.cshtml
+  MisSolicitudes.cshtml
  _ViewImports.cshtml
  _ViewStart.cshtml
 
 [dynamicFiles]
 Areas/Identity/Pages/_ViewStart.cshtml
-Views/Home/
- Index.cshtml
- Privacy.cshtml
-Views/Shared/
- Error.cshtml
- _Layout.cshtml
- _LoginPartial.cshtml
- _ValidationScriptsPartial.cshtml
-Views/Solicitudes/
- Crear.cshtml
- Detalle.cshtml
- MisSolicitudes.cshtml
 Views/
+ Analista/Index.cshtml
+ Home/
+  Index.cshtml
+  Privacy.cshtml
+ Shared/
+  Error.cshtml
+  _Layout.cshtml
+  _LoginPartial.cshtml
+  _ValidationScriptsPartial.cshtml
+ Solicitudes/
+  Crear.cshtml
+  Detalle.cshtml
+  MisSolicitudes.cshtml
  _ViewImports.cshtml
  _ViewStart.cshtml
