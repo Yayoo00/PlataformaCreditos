@@ -1,0 +1,19 @@
+@model PlataformaCreditos.Models.SolicitudCredito
+
+<h2>Detalle de solicitud</h2>
+
+<div class="card">
+    <div class="card-body">
+        <p><strong>ID:</strong> @Model.Id</p>
+        <p><strong>Monto solicitado:</strong> S/ @Model.MontoSolicitado</p>
+        <p><strong>Fecha:</strong> @Model.FechaSolicitud.ToShortDateString()</p>
+        <p><strong>Estado:</strong> @Model.Estado</p>
+
+        @if (!string.IsNullOrEmpty(Model.MotivoRechazo))
+        {
+            <p><strong>Motivo de rechazo:</strong> @Model.MotivoRechazo</p>
+        }
+    </div>
+</div>
+
+<a asp-action="MisSolicitudes" class="btn btn-secondary mt-3">Volver</a>
