@@ -28,7 +28,7 @@ public class ApplicationDbContext : IdentityDbContext
             new Cliente
             {
                 Id = 1,
-                UsuarioId = "user1",
+                UsuarioId = "EL_ID_REAL_DEL_USUARIO",
                 IngresosMensuales = 2000,
                 Activo = true
             },

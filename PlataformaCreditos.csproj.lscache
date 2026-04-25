@@ -56,12 +56,11 @@ TemporaryDependencyNodeTargetIdentifier=net8.0
 Controllers/
  HomeController.cs
  SolicitudesController.cs
-Data/
- ApplicationDbContext.cs
- Migrations/
-  00000000000000_CreateIdentitySchema.cs
-  00000000000000_CreateIdentitySchema.Designer.cs
-  ApplicationDbContextModelSnapshot.cs
+Data/ApplicationDbContext.cs
+Migrations/
+ 20260425174055_InitialCreate.cs
+ 20260425174055_InitialCreate.Designer.cs
+ ApplicationDbContextModelSnapshot.cs
 Models/
  Cliente.cs
  ErrorViewModel.cs
@@ -441,6 +440,7 @@ Views/Shared/
  _LoginPartial.cshtml
  _ValidationScriptsPartial.cshtml
 Views/Solicitudes/
+ Crear.cshtml
  Detalle.cshtml
  MisSolicitudes.cshtml
 Views/
@@ -458,6 +458,7 @@ Views/Shared/
  _LoginPartial.cshtml
  _ValidationScriptsPartial.cshtml
 Views/Solicitudes/
+ Crear.cshtml
  Detalle.cshtml
  MisSolicitudes.cshtml
 Views/

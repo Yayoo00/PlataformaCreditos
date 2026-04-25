@@ -37,6 +37,7 @@ public class SolicitudesController : Controller
         }
 
         var userId = _userManager.GetUserId(User);
+        Console.WriteLine("MI ID: " + userId);
 
         var query = _context.SolicitudesCredito
             .Include(s => s.Cliente)
@@ -75,5 +76,60 @@ public class SolicitudesController : Controller
             return NotFound();
 
         return View(solicitud);
+    }
+    public IActionResult Crear()
+    {
+        return View();
+    }
+    [HttpPost]
+    public async Task<IActionResult> Crear(SolicitudCredito solicitud)
+    {
+    var userId = _userManager.GetUserId(User);
+
+    var cliente = await _context.Clientes
+        .FirstOrDefaultAsync();
+
+    if (cliente == null)
+    {
+        ModelState.AddModelError("", "No existe cliente asociado.");
+        return View(solicitud);
+    }
+
+    if (!cliente.Activo)
+    {
+        ModelState.AddModelError("", "El cliente no está activo.");
+        return View(solicitud);
+    }
+
+    bool tienePendiente = await _context.SolicitudesCredito
+        .AnyAsync(s => s.ClienteId == cliente.Id && s.Estado == EstadoSolicitud.Pendiente);
+
+    if (tienePendiente)
+    {
+        ModelState.AddModelError("", "Ya tienes una solicitud pendiente.");
+        return View(solicitud);
+    }
+
+    if (solicitud.MontoSolicitado <= 0)
+    {
+        ModelState.AddModelError("", "El monto solicitado debe ser mayor a cero.");
+        return View(solicitud);
+    }
+
+    if (solicitud.MontoSolicitado > cliente.IngresosMensuales * 10)
+    {
+        ModelState.AddModelError("", "El monto solicitado no puede superar 10 veces los ingresos mensuales.");
+        return View(solicitud);
+    }
+
+    solicitud.ClienteId = cliente.Id;
+    solicitud.Estado = EstadoSolicitud.Pendiente;
+    solicitud.FechaSolicitud = DateTime.Now;
+
+    _context.SolicitudesCredito.Add(solicitud);
+    await _context.SaveChangesAsync();
+
+    TempData["Mensaje"] = "Solicitud registrada correctamente.";
+    return RedirectToAction("MisSolicitudes");
     }
 }

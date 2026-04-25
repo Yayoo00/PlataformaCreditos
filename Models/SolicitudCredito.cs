@@ -6,7 +6,7 @@ public class SolicitudCredito
     public int Id { get; set; }
 
     public int ClienteId { get; set; }
-    public Cliente Cliente { get; set; }
+    public Cliente? Cliente { get; set; }
 
     [Required]
     [Range(0.01, double.MaxValue)]
